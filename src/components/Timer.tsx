@@ -10,6 +10,7 @@ const Timer: React.FC = () => {
   const [isSetup, setIsSetup] = useState<boolean>(true);
   const {
     remainingSeconds,
+    totalSeconds,
     isRunning,
     isFinished,
     startTimer,
@@ -46,6 +47,8 @@ const Timer: React.FC = () => {
       timeDisplay={formatTime(remainingSeconds)}
       isRunning={isRunning}
       isFinished={isFinished}
+      remainingSeconds={remainingSeconds}
+      totalSeconds={totalSeconds}
       onStop={stopTimer}
       onReset={handleReset}
     />

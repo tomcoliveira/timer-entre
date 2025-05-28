@@ -8,6 +8,8 @@ interface TimerDisplayProps {
   timeDisplay: string;
   isRunning: boolean;
   isFinished: boolean;
+  remainingSeconds: number;
+  totalSeconds: number;
   onStop: () => void;
   onReset: () => void;
 }
@@ -17,9 +19,15 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   timeDisplay,
   isRunning,
   isFinished,
+  remainingSeconds,
+  totalSeconds,
   onStop,
   onReset
 }) => {
+  // Calcula a porcentagem do progresso restante
+  const progressPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
+  const progressWidth = (710 * progressPercentage) / 100;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
       <div 
@@ -36,7 +44,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontFamily: 'Sansation, sans-serif',
             fontSize: '25pt',
             fontWeight: 'normal',
-            letterSpacing: '-43px'
+            letterSpacing: '-1.5px' // Ajustado o kerning para ser mais suave
           }}
         >
           {title}
@@ -68,11 +76,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) - sobreposta na cinza, mesmo tamanho inicial */}
+        {/* Barra de progresso (amarela) - diminui conforme o tempo restante */}
         <div 
-          className="absolute"
+          className="absolute transition-all duration-1000 ease-linear"
           style={{
-            width: '710px',
+            width: `${progressWidth}px`,
             height: '30px',
             backgroundColor: '#ffb91a',
             top: '75px',
@@ -91,7 +99,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontSize: '25pt',
             fontWeight: 'bold',
             fontStyle: 'italic',
-            letterSpacing: '-143px'
+            letterSpacing: '-2px' // Ajustado o kerning para ser mais legível
           }}
         >
           {timeDisplay}
