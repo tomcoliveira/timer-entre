@@ -33,6 +33,9 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   
   // Largura da barra amarela baseada no tempo restante
   const yellowBarWidth = (barWidth * remainingPercentage) / 100;
+  
+  // Posição left calculada para alinhar a barra à direita
+  const yellowBarLeft = 20 + (barWidth - yellowBarWidth); // 20px + espaço vazio à esquerda
 
   return (
     <div 
@@ -93,7 +96,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) */}
+        {/* Barra de progresso (amarela) - agora encolhe pela esquerda */}
         <div 
           className="transition-all duration-1000 ease-linear"
           style={{
@@ -102,7 +105,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             height: '15px', // Travado em 15px
             backgroundColor: '#ffb91a',
             top: '50%',
-            left: '20px', // Travado em 20px
+            left: `${yellowBarLeft}px`, // Posição calculada para alinhar à direita
             transform: 'translateY(-50%)'
           }}
         />
