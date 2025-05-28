@@ -38,18 +38,16 @@ export const useAlarm = (isFinished: boolean, onAlarmComplete: () => void) => {
   };
 
   const playAlarmSequence = async () => {
-    console.log('Iniciando sequência de alarme');
+    console.log('Iniciando sequência de alarme de 10 segundos');
     
     // Primeiros 5 segundos: 3 pips
-    await playPipSequence(3, 400);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await playPipSequence(3, 1500); // 3 pips em 5 segundos = 1.5s de intervalo
     
-    // Próximos 2 segundos: 4 pips
-    await playPipSequence(4, 300);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Próximos 2 segundos: 4 pips  
+    await playPipSequence(4, 400); // 4 pips em 2 segundos = 400ms de intervalo
     
     // Últimos 3 segundos: 12 pips
-    await playPipSequence(12, 200);
+    await playPipSequence(12, 200); // 12 pips em 3 segundos = 200ms de intervalo
     
     onAlarmComplete();
   };

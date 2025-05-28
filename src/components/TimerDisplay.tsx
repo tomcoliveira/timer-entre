@@ -24,54 +24,54 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   onStop,
   onReset
 }) => {
-  // Calcula a porcentagem do tempo RESTANTE (de 100% para 0%)
+  // Calcula a porcentagem do tempo restante
   const remainingPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
   
-  // Ambas as barras com exatamente o mesmo tamanho
-  const barWidth = 708.75;
-  const barHeight = 10.5;
+  // Dimensões da barra
+  const barWidth = 710; // 750 - 40px (20px de cada lado)
+  const barHeight = 8;
   
   // Largura da barra amarela baseada no tempo restante
   const yellowBarWidth = (barWidth * remainingPercentage) / 100;
-  
-  // Posição da barra amarela: alinhada à direita para diminuir da direita para esquerda
-  const yellowBarLeft = 20 + (barWidth - yellowBarWidth);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
       <div 
-        className="relative bg-black"
-        style={{ width: '750px', height: '225px' }}
+        className="relative"
+        style={{ 
+          width: '750px', 
+          height: '225px',
+          backgroundColor: '#000000'
+        }}
       >
-        {/* Título com underscore amarelo - 1d da base */}
+        {/* Título */}
         <div 
           className="absolute"
           style={{ 
-            bottom: `${10.5 + 25}px`, // 1d (altura da letra d ≈ 25px no font-size 25pt) da barra
+            top: '20px',
             left: '20px',
             color: '#333330',
-            fontFamily: 'Sansation, sans-serif',
-            fontSize: '25pt',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '18px',
             fontWeight: 'normal'
           }}
         >
-          <span style={{ color: '#ffb91a' }}>_</span>{title}
+          {title}
         </div>
         
-        {/* Tempo numérico com underscore amarelo após os números - 1d da base */}
+        {/* Timer numérico */}
         <div 
           className="absolute"
           style={{ 
-            bottom: `${10.5 + 25}px`, // 1d (altura da letra d ≈ 25px no font-size 25pt) da barra
+            top: '20px',
             right: '20px',
             color: '#333330',
-            fontFamily: 'Artegra Sans, sans-serif',
-            fontSize: '25pt',
-            fontStyle: 'italic',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '18px',
             fontWeight: 'normal'
           }}
         >
-          {timeDisplay}<span style={{ color: '#ffb91a' }}>_</span>
+          {timeDisplay}
         </div>
         
         {/* Barra de fundo (cinza) */}
@@ -87,7 +87,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) - diminui da direita para esquerda */}
+        {/* Barra de progresso (amarela) - diminui conforme o tempo */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
@@ -95,29 +95,28 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             height: `${barHeight}px`,
             backgroundColor: '#ffb91a',
             top: '50%',
-            left: `${yellowBarLeft}px`,
+            left: '20px',
             transform: 'translateY(-50%)'
           }}
         />
         
-        {/* Ícones de controle - 1d abaixo da barra, alinhados ao final dos números */}
+        {/* Botões de controle */}
         <div 
-          className="absolute flex items-center cursor-pointer"
+          className="absolute flex items-center gap-3"
           style={{
-            top: `${50 + barHeight/2 + 25}px`, // 1d (25px) abaixo da barra
-            right: '58px', // Alinhado com o final dos números
-            gap: '10px'
+            bottom: '20px',
+            right: '20px'
           }}
         >
           <Pause 
-            size={18} 
-            style={{ color: '#ffb91a' }} 
+            size={20} 
+            style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onStop}
             className="hover:opacity-80 transition-opacity"
           />
           <Square 
-            size={18} 
-            style={{ color: '#ffb91a' }} 
+            size={20} 
+            style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onReset}
             className="hover:opacity-80 transition-opacity"
           />
