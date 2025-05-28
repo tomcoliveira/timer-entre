@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Play, Pause, Square } from 'lucide-react';
 
 interface TimerDisplayProps {
   title: string;
@@ -25,20 +26,28 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título */}
+        {/* Título - sansation, corpo 25, cor #333330, espaçamento -43 */}
         <div 
-          className="absolute top-6 left-6 text-lg font-light"
+          className="absolute top-6 left-6"
           style={{ 
             color: '#333330',
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'sansation, sans-serif',
             fontSize: '25px',
-            letterSpacing: '-0.43px'
+            letterSpacing: '-43px',
+            fontWeight: 'normal'
           }}
         >
           {title}
         </div>
         
-        {/* Barra cinza */}
+        {/* Controles do timer no canto superior direito */}
+        <div className="absolute top-6 right-6 flex items-center space-x-2">
+          <Play size={20} style={{ color: '#ffb91a' }} />
+          <Pause size={20} style={{ color: '#ffb91a' }} />
+          <Square size={20} style={{ color: '#ffb91a' }} />
+        </div>
+        
+        {/* Barra cinza - 540x40 */}
         <div 
           className="absolute"
           style={{
@@ -50,7 +59,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra laranja */}
+        {/* Barra laranja - 525x30 */}
         <div 
           className="absolute"
           style={{
@@ -62,14 +71,21 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Timer */}
+        {/* Controles inferiores esquerdos */}
+        <div className="absolute bottom-6 left-6 flex items-center space-x-2">
+          <Play size={24} style={{ color: '#ffb91a' }} />
+          <Pause size={24} style={{ color: '#ffb91a' }} />
+          <Square size={24} style={{ color: '#ffb91a' }} />
+        </div>
+        
+        {/* Timer - artegasans, corpo 25, espaçamento -143, cor #333330 para números, #ffb91a bold+itálico */}
         <div 
-          className="absolute bottom-6 right-6 font-bold italic"
+          className="absolute bottom-6 right-6"
           style={{ 
             color: '#ffb91a',
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'artegasans, sans-serif',
             fontSize: '48px',
-            letterSpacing: '-1.43px',
+            letterSpacing: '-143px',
             fontWeight: 'bold',
             fontStyle: 'italic'
           }}
