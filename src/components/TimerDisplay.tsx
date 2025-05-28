@@ -24,8 +24,8 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   onStop,
   onReset
 }) => {
-  // Calcula a porcentagem do progresso (de 100% para 0%)
-  const progressPercentage = totalSeconds > 0 ? ((totalSeconds - remainingSeconds) / totalSeconds) * 100 : 0;
+  // Calcula a porcentagem do tempo RESTANTE (de 100% para 0%)
+  const remainingPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
   
   // Barra cinza: tamanho base
   const grayBarWidth = 708.75;
@@ -35,7 +35,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   const yellowBarWidth = grayBarWidth * 0.95; // 5% menor no total (2,5% de cada lado)
   const yellowBarHeight = grayBarHeight * 0.95; // 5% menor no total (2,5% de cada lado)
   
-  const progressWidth = (yellowBarWidth * progressPercentage) / 100;
+  const remainingWidth = (yellowBarWidth * remainingPercentage) / 100;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -86,11 +86,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) - 2,5% menor em cada lado */}
+        {/* Barra de progresso (amarela) - mostra tempo RESTANTE */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
-            width: `${progressWidth}px`,
+            width: `${remainingWidth}px`,
             height: `${yellowBarHeight}px`,
             backgroundColor: '#ffb91a',
             top: `${75 + (grayBarHeight - yellowBarHeight) / 2}px`, // Centralizada verticalmente
