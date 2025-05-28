@@ -27,13 +27,13 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   // Calcula a porcentagem do progresso (de 100% para 0%)
   const progressPercentage = totalSeconds > 0 ? ((totalSeconds - remainingSeconds) / totalSeconds) * 100 : 0;
   
-  // Barra amarela: dimensões base
-  const yellowBarWidth = 675;
-  const yellowBarHeight = 10;
+  // Barra cinza: tamanho base
+  const grayBarWidth = 708.75;
+  const grayBarHeight = 10.5;
   
-  // Barra cinza: 5% maior que a amarela
-  const grayBarWidth = yellowBarWidth * 1.05; // 708.75px
-  const grayBarHeight = yellowBarHeight * 1.05; // 10.5px
+  // Barra amarela: 2,5% menor em cada lado da cinza
+  const yellowBarWidth = grayBarWidth * 0.95; // 5% menor no total (2,5% de cada lado)
+  const yellowBarHeight = grayBarHeight * 0.95; // 5% menor no total (2,5% de cada lado)
   
   const progressWidth = (yellowBarWidth * progressPercentage) / 100;
 
@@ -58,7 +58,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           <span style={{ color: '#ffb91a' }}>_</span>{title}
         </div>
         
-        {/* Tempo numérico - mesma altura do título */}
+        {/* Tempo numérico com underscore amarelo após os números */}
         <div 
           className="absolute"
           style={{ 
@@ -71,10 +71,10 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontWeight: 'normal'
           }}
         >
-          {timeDisplay}
+          {timeDisplay}<span style={{ color: '#ffb91a' }}>_</span>
         </div>
         
-        {/* Barra de fundo (cinza) - 5% maior que a amarela */}
+        {/* Barra de fundo (cinza) */}
         <div 
           className="absolute"
           style={{
@@ -86,7 +86,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) - centralizada dentro da cinza */}
+        {/* Barra de progresso (amarela) - 2,5% menor em cada lado */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
