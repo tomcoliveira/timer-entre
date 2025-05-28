@@ -47,7 +47,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{ 
-            top: '25px',
+            top: '30px',
             left: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
@@ -62,7 +62,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{ 
-            top: '25px',
+            top: '30px',
             right: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
@@ -103,7 +103,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute flex items-center gap-3"
           style={{
-            bottom: '25px',
+            bottom: '35px',
             right: '20px'
           }}
         >
