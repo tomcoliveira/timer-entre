@@ -24,16 +24,23 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   onStop,
   onReset
 }) => {
-  // Calcula a porcentagem do progresso restante
-  const progressPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
-  const progressWidth = (675 * progressPercentage) / 100; // Barra amarela (95% da cinza)
+  // Calcula a porcentagem do progresso (de 100% para 0%)
+  const progressPercentage = totalSeconds > 0 ? ((totalSeconds - remainingSeconds) / totalSeconds) * 100 : 0;
+  const maxProgressWidth = 675; // 95% da barra cinza (710px * 0.95)
+  const progressWidth = (maxProgressWidth * progressPercentage) / 100;
 
-  // Formata o tempo com separador amarelo sem negrito
+  // Formata o tempo com separador amarelo
   const formatTimeWithColoredSeparator = (timeString: string) => {
     const [minutes, seconds] = timeString.split(':');
     return (
       <>
-        {minutes}<span style={{ color: '#ffb91a', fontWeight: 'normal' }}>:</span>{seconds}
+        {minutes}
+        <span style={{ 
+          color: '#ffb91a', 
+          fontWeight: 'normal',
+          fontFamily: 'Artega Sans, sans-serif' // Mesma fonte do restante
+        }}>:</span>
+        {seconds}
       </>
     );
   };
@@ -44,7 +51,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título - cor igual ao número */}
+        {/* Título */}
         <div 
           className="absolute"
           style={{ 
@@ -59,11 +66,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           {title}
         </div>
         
-        {/* Ícones de controle - alinhados com o título */}
+        {/* Ícones de controle - mesma distância da barra que o título */}
         <div 
           className="absolute flex items-center cursor-pointer"
           style={{
-            top: '22px', // Mesmo nível do título
+            top: '50px', // 25px de distância da barra (75px - 25px)
             right: '20px',
             gap: '10px'
           }}
@@ -82,12 +89,12 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           />
         </div>
         
-        {/* Barra de fundo (cinza) - 5% maior que a amarela */}
+        {/* Barra de fundo (cinza) - 30% menor na altura */}
         <div 
           className="absolute"
           style={{
             width: '710px',
-            height: '15px',
+            height: '10.5px', // 30% menor que 15px
             backgroundColor: '#333330',
             top: '75px',
             left: '20px'
@@ -99,18 +106,18 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           className="absolute transition-all duration-1000 ease-linear"
           style={{
             width: `${progressWidth}px`,
-            height: '14.25px', // 95% da altura da cinza
+            height: '9.975px', // 95% da altura da cinza (10.5 * 0.95)
             backgroundColor: '#ffb91a',
-            top: '75.375px', // Centralizada verticalmente
-            left: '37.5px' // Centralizada horizontalmente
+            top: '75.2625px', // Centralizada verticalmente ((10.5 - 9.975) / 2 + 75)
+            left: '37.5px' // Centralizada horizontalmente ((710 - 675) / 2 + 20)
           }}
         />
         
-        {/* Tempo numérico - cor igual ao título, sem negrito no separador */}
+        {/* Tempo numérico - mesma distância da barra que o título */}
         <div 
           className="absolute"
           style={{ 
-            top: '140px',
+            top: '100px', // 25px de distância da barra (75px + 10.5px + 14.5px)
             right: '20px',
             color: '#333330',
             fontFamily: 'Artega Sans, sans-serif',
