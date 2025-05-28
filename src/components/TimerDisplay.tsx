@@ -52,7 +52,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             left: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '36px',
+            fontSize: '23px',
             fontWeight: 'normal'
           }}
         >
@@ -67,7 +67,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             right: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '36px',
+            fontSize: '23px',
             fontWeight: 'normal'
           }}
         >
