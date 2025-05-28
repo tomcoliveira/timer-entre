@@ -29,18 +29,27 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   const maxProgressWidth = 675; // 95% da barra cinza (710px * 0.95)
   const progressWidth = (maxProgressWidth * progressPercentage) / 100;
 
-  // Formata o tempo com separador amarelo
+  // Formata o tempo com separador amarelo sem negrito
   const formatTimeWithColoredSeparator = (timeString: string) => {
     const [minutes, seconds] = timeString.split(':');
     return (
       <>
-        {minutes}
+        <span style={{ 
+          fontFamily: 'Artega Sans, sans-serif',
+          fontWeight: 'bold',
+          fontStyle: 'italic'
+        }}>{minutes}</span>
         <span style={{ 
           color: '#ffb91a', 
           fontWeight: 'normal',
-          fontFamily: 'Artega Sans, sans-serif' // Mesma fonte do restante
+          fontFamily: 'Artega Sans, sans-serif',
+          fontStyle: 'normal'
         }}>:</span>
-        {seconds}
+        <span style={{ 
+          fontFamily: 'Artega Sans, sans-serif',
+          fontWeight: 'bold',
+          fontStyle: 'italic'
+        }}>{seconds}</span>
       </>
     );
   };
@@ -51,7 +60,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título */}
+        {/* Título com underscore amarelo */}
         <div 
           className="absolute"
           style={{ 
@@ -63,30 +72,21 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontWeight: 'normal'
           }}
         >
-          {title}
+          <span style={{ color: '#ffb91a' }}>_</span>{title}
         </div>
         
-        {/* Ícones de controle - mesma distância da barra que o título */}
+        {/* Tempo numérico - mesma distância da barra que o título (acima) */}
         <div 
-          className="absolute flex items-center cursor-pointer"
-          style={{
-            top: '50px', // 25px de distância da barra (75px - 25px)
+          className="absolute"
+          style={{ 
+            top: '22px', // Mesma altura do título
             right: '20px',
-            gap: '10px'
+            color: '#333330',
+            fontFamily: 'Artega Sans, sans-serif',
+            fontSize: '25pt'
           }}
         >
-          <Pause 
-            size={18} 
-            style={{ color: '#ffb91a' }} 
-            onClick={onStop}
-            className="hover:opacity-80 transition-opacity"
-          />
-          <Square 
-            size={18} 
-            style={{ color: '#ffb91a' }} 
-            onClick={onReset}
-            className="hover:opacity-80 transition-opacity"
-          />
+          {formatTimeWithColoredSeparator(timeDisplay)}
         </div>
         
         {/* Barra de fundo (cinza) - 30% menor na altura */}
@@ -113,20 +113,27 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Tempo numérico - mesma distância da barra que o título */}
+        {/* Ícones de controle - mesma distância da barra que o título (abaixo) */}
         <div 
-          className="absolute"
-          style={{ 
+          className="absolute flex items-center cursor-pointer"
+          style={{
             top: '100px', // 25px de distância da barra (75px + 10.5px + 14.5px)
             right: '20px',
-            color: '#333330',
-            fontFamily: 'Artega Sans, sans-serif',
-            fontSize: '25pt',
-            fontWeight: 'bold',
-            fontStyle: 'italic'
+            gap: '10px'
           }}
         >
-          {formatTimeWithColoredSeparator(timeDisplay)}
+          <Pause 
+            size={18} 
+            style={{ color: '#ffb91a' }} 
+            onClick={onStop}
+            className="hover:opacity-80 transition-opacity"
+          />
+          <Square 
+            size={18} 
+            style={{ color: '#ffb91a' }} 
+            onClick={onReset}
+            className="hover:opacity-80 transition-opacity"
+          />
         </div>
       </div>
     </div>
