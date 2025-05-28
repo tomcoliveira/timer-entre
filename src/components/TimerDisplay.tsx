@@ -27,15 +27,15 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   // Calcula a porcentagem do tempo RESTANTE (de 100% para 0%)
   const remainingPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
   
-  // Barra cinza: tamanho base
-  const grayBarWidth = 708.75;
-  const grayBarHeight = 10.5;
+  // Ambas as barras com exatamente o mesmo tamanho
+  const barWidth = 708.75;
+  const barHeight = 10.5;
   
-  // Barra amarela: 2,5% menor em cada lado da cinza
-  const yellowBarWidth = grayBarWidth * 0.95; // 5% menor no total (2,5% de cada lado)
-  const yellowBarHeight = grayBarHeight * 0.95; // 5% menor no total (2,5% de cada lado)
+  // Largura da barra amarela baseada no tempo restante
+  const yellowBarWidth = (barWidth * remainingPercentage) / 100;
   
-  const remainingWidth = (yellowBarWidth * remainingPercentage) / 100;
+  // Posição da barra amarela: sempre alinhada à direita da barra cinza
+  const yellowBarLeft = 20 + (barWidth - yellowBarWidth);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -62,7 +62,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{ 
-            top: '22px', // Mesma altura do título
+            top: '22px',
             right: '20px',
             color: '#333330',
             fontFamily: 'Artegra Sans, sans-serif',
@@ -78,32 +78,32 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{
-            width: `${grayBarWidth}px`,
-            height: `${grayBarHeight}px`,
+            width: `${barWidth}px`,
+            height: `${barHeight}px`,
             backgroundColor: '#333330',
             top: '75px',
             left: '20px'
           }}
         />
         
-        {/* Barra de progresso (amarela) - mostra tempo RESTANTE */}
+        {/* Barra de progresso (amarela) - diminui da esquerda para direita */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
-            width: `${remainingWidth}px`,
-            height: `${yellowBarHeight}px`,
+            width: `${yellowBarWidth}px`,
+            height: `${barHeight}px`,
             backgroundColor: '#ffb91a',
-            top: `${75 + (grayBarHeight - yellowBarHeight) / 2}px`, // Centralizada verticalmente
-            left: `${20 + (grayBarWidth - yellowBarWidth) / 2}px` // Centralizada horizontalmente
+            top: '75px',
+            left: `${yellowBarLeft}px`
           }}
         />
         
-        {/* Ícones de controle - mesma distância da barra que o título (abaixo) */}
+        {/* Ícones de controle - alinhados ao final dos números (sem o underscore) */}
         <div 
           className="absolute flex items-center cursor-pointer"
           style={{
-            top: `${75 + grayBarHeight + 25}px`, // 25px de distância da barra
-            right: '20px',
+            top: `${75 + barHeight + 25}px`,
+            right: '58px', // Ajustado para alinhar com o final dos números
             gap: '10px'
           }}
         >
