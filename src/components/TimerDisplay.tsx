@@ -21,9 +21,9 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   onReset
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white font-inter">
       <div 
-        className="relative bg-black"
+        className="relative bg-white border-2 border-black"
         style={{ width: '750px', height: '225px' }}
       >
         {/* Título - sansation, corpo 25, cor #333330, espaçamento -43 */}
@@ -41,10 +41,10 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         </div>
         
         {/* Controles do timer no canto superior direito */}
-        <div className="absolute top-6 right-6 flex items-center space-x-2">
-          <Play size={20} style={{ color: '#ffb91a' }} />
-          <Pause size={20} style={{ color: '#ffb91a' }} />
-          <Square size={20} style={{ color: '#ffb91a' }} />
+        <div className="absolute top-6 right-6 flex items-center space-x-3">
+          <Play size={24} style={{ color: '#ffb91a' }} />
+          <Pause size={24} style={{ color: '#ffb91a' }} />
+          <Square size={24} style={{ color: '#ffb91a' }} />
         </div>
         
         {/* Barra cinza - 540x40 */}
@@ -71,18 +71,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Controles inferiores esquerdos */}
-        <div className="absolute bottom-6 left-6 flex items-center space-x-2">
-          <Play size={24} style={{ color: '#ffb91a' }} />
-          <Pause size={24} style={{ color: '#ffb91a' }} />
-          <Square size={24} style={{ color: '#ffb91a' }} />
-        </div>
-        
-        {/* Timer - artegasans, corpo 25, espaçamento -143, cor #333330 para números, #ffb91a bold+itálico */}
+        {/* Timer - artegasans, corpo 48, espaçamento -143, cor #333330 para números, #ffb91a bold+itálico */}
         <div 
           className="absolute bottom-6 right-6"
           style={{ 
-            color: '#ffb91a',
+            color: '#333330',
             fontFamily: 'artegasans, sans-serif',
             fontSize: '48px',
             letterSpacing: '-143px',
