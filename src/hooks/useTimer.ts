@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 
 export const useTimer = () => {
@@ -59,7 +60,14 @@ export const useTimer = () => {
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(3, '0')}:${secs.toString().padStart(2, '0')}`;
+    
+    // Se for mais de 99 minutos, mostra apenas os minutos sem limite
+    if (mins > 99) {
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    // Para 99 minutos ou menos, usa 2 dígitos
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return {

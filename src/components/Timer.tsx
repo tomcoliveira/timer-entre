@@ -24,9 +24,9 @@ const Timer: React.FC = () => {
 
   useAlarm(isFinished, handleAlarmComplete);
 
-  const handleStart = (timerTitle: string, minutes: number, seconds: number = 0) => {
+  const handleStart = (timerTitle: string, minutes: number) => {
     setTitle(timerTitle);
-    startTimer(minutes, seconds);
+    startTimer(minutes, 0); // sempre 0 segundos
     setIsSetup(false);
   };
 
