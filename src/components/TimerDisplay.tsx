@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Pause, Square } from 'lucide-react';
@@ -26,32 +27,38 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   // Calcula a porcentagem do tempo restante
   const remainingPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
   
-  // Dimensões da barra
-  const barWidth = 710; // 750 - 40px (20px de cada lado)
-  const barHeight = 15;
+  // Dimensões fixas da barra
+  const barWidth = 710; // Travado em 710px
+  const barHeight = 15; // Travado em 15px
   
   // Largura da barra amarela baseada no tempo restante
   const yellowBarWidth = (barWidth * remainingPercentage) / 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
+    <div 
+      className="flex flex-col items-center justify-center bg-black font-inter"
+      style={{ 
+        minHeight: '100vh',
+        width: '100vw'
+      }}
+    >
       <div 
-        className="relative"
         style={{ 
-          width: '750px', 
-          height: '225px',
-          backgroundColor: '#000000'
+          width: '750px', // Travado em 750px
+          height: '225px', // Travado em 225px
+          backgroundColor: '#000000',
+          position: 'relative'
         }}
       >
         {/* Título */}
         <div 
-          className="absolute"
           style={{ 
-            top: '45px',
-            left: '20px',
+            position: 'absolute',
+            top: '45px', // Travado em 45px
+            left: '20px', // Travado em 20px
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '30px',
+            fontSize: '30px', // Travado em 30px
             fontWeight: 'normal'
           }}
         >
@@ -60,13 +67,13 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         
         {/* Timer numérico */}
         <div 
-          className="absolute"
           style={{ 
-            top: '45px',
-            right: '20px',
+            position: 'absolute',
+            top: '45px', // Travado em 45px
+            right: '20px', // Travado em 20px
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '30px',
+            fontSize: '30px', // Travado em 30px
             fontWeight: 'normal'
           }}
         >
@@ -75,46 +82,50 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         
         {/* Barra de fundo (cinza) */}
         <div 
-          className="absolute"
           style={{
-            width: `${barWidth}px`,
-            height: `${barHeight}px`,
+            position: 'absolute',
+            width: '710px', // Travado em 710px
+            height: '15px', // Travado em 15px
             backgroundColor: '#333330',
             top: '50%',
-            left: '20px',
+            left: '20px', // Travado em 20px
             transform: 'translateY(-50%)'
           }}
         />
         
-        {/* Barra de progresso (amarela) - diminui conforme o tempo pela esquerda */}
+        {/* Barra de progresso (amarela) */}
         <div 
-          className="absolute transition-all duration-1000 ease-linear"
+          className="transition-all duration-1000 ease-linear"
           style={{
+            position: 'absolute',
             width: `${yellowBarWidth}px`,
-            height: `${barHeight}px`,
+            height: '15px', // Travado em 15px
             backgroundColor: '#ffb91a',
             top: '50%',
-            left: '20px',
+            left: '20px', // Travado em 20px
             transform: 'translateY(-50%)'
           }}
         />
         
         {/* Botões de controle */}
         <div 
-          className="absolute flex items-center gap-3"
           style={{
-            bottom: '45px',
-            right: '20px'
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px', // Travado em 12px
+            bottom: '45px', // Travado em 45px
+            right: '20px' // Travado em 20px
           }}
         >
           <Pause 
-            size={30} 
+            size={30} // Travado em 30px
             style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onStop}
             className="hover:opacity-80 transition-opacity"
           />
           <Square 
-            size={30} 
+            size={30} // Travado em 30px
             style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onReset}
             className="hover:opacity-80 transition-opacity"
