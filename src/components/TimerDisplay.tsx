@@ -26,33 +26,15 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
 }) => {
   // Calcula a porcentagem do progresso (de 100% para 0%)
   const progressPercentage = totalSeconds > 0 ? ((totalSeconds - remainingSeconds) / totalSeconds) * 100 : 0;
-  const maxProgressWidth = 675; // 95% da barra cinza (710px * 0.95)
-  const progressWidth = (maxProgressWidth * progressPercentage) / 100;
-
-  // Formata o tempo com separador amarelo sem negrito
-  const formatTimeWithColoredSeparator = (timeString: string) => {
-    const [minutes, seconds] = timeString.split(':');
-    return (
-      <>
-        <span style={{ 
-          fontFamily: 'Artega Sans, sans-serif',
-          fontWeight: 'bold',
-          fontStyle: 'italic'
-        }}>{minutes}</span>
-        <span style={{ 
-          color: '#ffb91a', 
-          fontWeight: 'normal',
-          fontFamily: 'Artega Sans, sans-serif',
-          fontStyle: 'normal'
-        }}>:</span>
-        <span style={{ 
-          fontFamily: 'Artega Sans, sans-serif',
-          fontWeight: 'bold',
-          fontStyle: 'italic'
-        }}>{seconds}</span>
-      </>
-    );
-  };
+  
+  // Barra cinza: 710px largura, 15px altura
+  // Barra amarela: 95% da cinza = 674.5px largura, 14.25px altura
+  const grayBarWidth = 710;
+  const grayBarHeight = 15;
+  const yellowBarWidth = grayBarWidth * 0.95; // 674.5px
+  const yellowBarHeight = grayBarHeight * 0.95; // 14.25px
+  
+  const progressWidth = (yellowBarWidth * progressPercentage) / 100;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -83,33 +65,35 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             right: '20px',
             color: '#333330',
             fontFamily: 'Artega Sans, sans-serif',
-            fontSize: '25pt'
+            fontSize: '25pt',
+            fontWeight: 'bold',
+            fontStyle: 'italic'
           }}
         >
-          {formatTimeWithColoredSeparator(timeDisplay)}
+          {timeDisplay}
         </div>
         
-        {/* Barra de fundo (cinza) - 30% menor na altura */}
+        {/* Barra de fundo (cinza) */}
         <div 
           className="absolute"
           style={{
-            width: '710px',
-            height: '10.5px', // 30% menor que 15px
+            width: `${grayBarWidth}px`,
+            height: `${grayBarHeight}px`,
             backgroundColor: '#333330',
             top: '75px',
             left: '20px'
           }}
         />
         
-        {/* Barra de progresso (amarela) - 95% do tamanho da cinza, centralizada */}
+        {/* Barra de progresso (amarela) - centralizada dentro da cinza */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
             width: `${progressWidth}px`,
-            height: '9.975px', // 95% da altura da cinza (10.5 * 0.95)
+            height: `${yellowBarHeight}px`,
             backgroundColor: '#ffb91a',
-            top: '75.2625px', // Centralizada verticalmente ((10.5 - 9.975) / 2 + 75)
-            left: '37.5px' // Centralizada horizontalmente ((710 - 675) / 2 + 20)
+            top: `${75 + (grayBarHeight - yellowBarHeight) / 2}px`, // Centralizada verticalmente
+            left: `${20 + (grayBarWidth - yellowBarWidth) / 2}px` // Centralizada horizontalmente
           }}
         />
         
@@ -117,7 +101,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute flex items-center cursor-pointer"
           style={{
-            top: '100px', // 25px de distância da barra (75px + 10.5px + 14.5px)
+            top: `${75 + grayBarHeight + 25}px`, // 25px de distância da barra
             right: '20px',
             gap: '10px'
           }}
