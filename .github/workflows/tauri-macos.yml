@@ -1,0 +1,48 @@
+name: Build macOS Tauri App
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Build frontend (Vite)
+        run: npm run build
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --locked
+
+      - name: Initialize Tauri (CI mode)
+        run: |
+          if [ ! -d "src-tauri" ]; then
+            cargo tauri init --ci --app-name "Timer Entre" --window-title "Timer Entre" --dist-dir ../dist --dev-path http://localhost:5173
+          fi
+
+      - name: Build Tauri macOS app
+        run: npm run tauri build -- --target universal-apple-darwin
+
+      - name: Upload .dmg artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: timer-entre-macos
+          path: src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
