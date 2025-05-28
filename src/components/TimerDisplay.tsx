@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Pause, Square } from 'lucide-react';
@@ -48,7 +47,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{ 
-            top: '20px',
+            top: '25px',
             left: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
@@ -63,7 +62,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute"
           style={{ 
-            top: '20px',
+            top: '25px',
             right: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
@@ -104,7 +103,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         <div 
           className="absolute flex items-center gap-3"
           style={{
-            bottom: '20px',
+            bottom: '25px',
             right: '20px'
           }}
         >
