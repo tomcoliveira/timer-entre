@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Pause, Square } from 'lucide-react';
@@ -28,7 +29,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   
   // Dimensões da barra
   const barWidth = 710; // 750 - 40px (20px de cada lado)
-  const barHeight = 8;
+  const barHeight = 15;
   
   // Largura da barra amarela baseada no tempo restante
   const yellowBarWidth = (barWidth * remainingPercentage) / 100;
