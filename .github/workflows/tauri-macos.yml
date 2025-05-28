@@ -35,7 +35,7 @@ jobs:
       - name: Initialize Tauri (CI mode)
         run: |
           if [ ! -d "src-tauri" ]; then
-            cargo tauri init --ci --app-name "Timer Entre" --window-title "Timer Entre" --dist-dir ../dist --dev-path http://localhost:5173
+            cargo tauri init --ci --app-name "Timer Entre" --window-title "Timer Entre"
           fi
 
       - name: Build Tauri macOS app
