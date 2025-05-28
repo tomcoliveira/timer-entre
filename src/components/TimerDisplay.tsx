@@ -21,9 +21,9 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   onReset
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white font-inter">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
       <div 
-        className="relative bg-white border-2 border-black"
+        className="relative bg-black border-2 border-white"
         style={{ width: '750px', height: '225px' }}
       >
         {/* Título - sansation, corpo 25, cor #333330, espaçamento -43 */}
