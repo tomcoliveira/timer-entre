@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Pause, Square } from 'lucide-react';
@@ -109,13 +108,13 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         >
           <Pause 
-            size={20} 
+            size={30} 
             style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onStop}
             className="hover:opacity-80 transition-opacity"
           />
           <Square 
-            size={20} 
+            size={30} 
             style={{ color: '#ffb91a', cursor: 'pointer' }} 
             onClick={onReset}
             className="hover:opacity-80 transition-opacity"
