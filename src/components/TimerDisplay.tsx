@@ -52,7 +52,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             left: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '18px',
+            fontSize: '36px',
             fontWeight: 'normal'
           }}
         >
@@ -67,7 +67,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             right: '20px',
             color: '#333330',
             fontFamily: 'Inter, sans-serif',
-            fontSize: '18px',
+            fontSize: '36px',
             fontWeight: 'normal'
           }}
         >
@@ -87,7 +87,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           }}
         />
         
-        {/* Barra de progresso (amarela) - diminui conforme o tempo */}
+        {/* Barra de progresso (amarela) - diminui conforme o tempo pela esquerda */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
