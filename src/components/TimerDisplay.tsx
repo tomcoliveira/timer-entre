@@ -27,12 +27,13 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   // Calcula a porcentagem do progresso (de 100% para 0%)
   const progressPercentage = totalSeconds > 0 ? ((totalSeconds - remainingSeconds) / totalSeconds) * 100 : 0;
   
-  // Barra cinza: 710px largura, 15px altura
-  // Barra amarela: 95% da cinza = 674.5px largura, 14.25px altura
-  const grayBarWidth = 710;
-  const grayBarHeight = 15;
-  const yellowBarWidth = grayBarWidth * 0.95; // 674.5px
-  const yellowBarHeight = grayBarHeight * 0.95; // 14.25px
+  // Barra amarela: largura base
+  const yellowBarWidth = 675;
+  const yellowBarHeight = 10;
+  
+  // Barra cinza: 5% maior que a amarela
+  const grayBarWidth = yellowBarWidth * 1.05; // 708.75px
+  const grayBarHeight = yellowBarHeight * 1.05; // 10.5px
   
   const progressWidth = (yellowBarWidth * progressPercentage) / 100;
 
@@ -57,23 +58,22 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           <span style={{ color: '#ffb91a' }}>_</span>{title}
         </div>
         
-        {/* Tempo numérico - mesma distância da barra que o título (acima) */}
+        {/* Tempo numérico - mesma altura do título */}
         <div 
           className="absolute"
           style={{ 
             top: '22px', // Mesma altura do título
             right: '20px',
             color: '#333330',
-            fontFamily: 'Artega Sans, sans-serif',
+            fontFamily: 'Sansation, sans-serif',
             fontSize: '25pt',
-            fontWeight: 'bold',
-            fontStyle: 'italic'
+            fontWeight: 'normal'
           }}
         >
           {timeDisplay}
         </div>
         
-        {/* Barra de fundo (cinza) */}
+        {/* Barra de fundo (cinza) - 5% maior que a amarela */}
         <div 
           className="absolute"
           style={{
