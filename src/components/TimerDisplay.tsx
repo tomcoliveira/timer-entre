@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, Square } from 'lucide-react';
+import { Pause, Square } from 'lucide-react';
 
 interface TimerDisplayProps {
   title: string;
@@ -26,7 +26,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
 }) => {
   // Calcula a porcentagem do progresso restante
   const progressPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
-  const progressWidth = (710 * progressPercentage) / 100;
+  const progressWidth = (705 * progressPercentage) / 100; // Barra amarela um pouco menor
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -34,7 +34,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título - Sansation, 25pt, cor #333330, kerning -43, esquerda, 20-25px do topo */}
+        {/* Título - Sansation, 25pt, cor #333330, kerning -10, esquerda, 20-25px do topo */}
         <div 
           className="absolute"
           style={{ 
@@ -44,51 +44,60 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontFamily: 'Sansation, sans-serif',
             fontSize: '25pt',
             fontWeight: 'normal',
-            letterSpacing: '-43px' // Kerning original mais agressivo
+            letterSpacing: '-10px'
           }}
         >
           {title}
         </div>
         
-        {/* Ícones de controle - direita superior, acima da barra, amarelo #ffb91a, 15-20px, espaçamento 10px */}
+        {/* Ícones de controle - alinhados com o título, direita, amarelo #ffb91a, 18px, espaçamento 10px */}
         <div 
-          className="absolute flex items-center"
+          className="absolute flex items-center cursor-pointer"
           style={{
-            top: '20px',
+            top: '22px', // Mesmo alinhamento do título
             right: '20px',
             gap: '10px'
           }}
         >
-          <Play size={18} style={{ color: '#ffb91a' }} />
-          <Pause size={18} style={{ color: '#ffb91a' }} />
-          <Square size={18} style={{ color: '#ffb91a' }} />
+          <Pause 
+            size={18} 
+            style={{ color: '#ffb91a' }} 
+            onClick={onStop}
+            className="hover:opacity-80 transition-opacity"
+          />
+          <Square 
+            size={18} 
+            style={{ color: '#ffb91a' }} 
+            onClick={onReset}
+            className="hover:opacity-80 transition-opacity"
+          />
         </div>
         
-        {/* Barra de fundo (cinza) - largura total com margem ~20px, altura ~30px, centralizada, abaixo do título */}
+        {/* Barra de fundo (cinza) - ligeiramente maior que a amarela */}
         <div 
           className="absolute"
           style={{
-            width: '710px',
-            height: '30px',
+            width: '715px', // Ligeiramente maior
+            height: '32px', // Ligeiramente maior
             backgroundColor: '#333330',
-            top: '75px',
-            left: '20px'
+            top: '74px', // Ligeiramente acima para centralizar
+            left: '17.5px' // Ligeiramente à esquerda para centralizar
           }}
         />
         
-        {/* Barra de progresso (amarela) - diminui conforme o tempo restante */}
+        {/* Barra de progresso (amarela) - diminui conforme o tempo restante, centralizada na cinza */}
         <div 
           className="absolute transition-all duration-1000 ease-linear"
           style={{
             width: `${progressWidth}px`,
             height: '30px',
             backgroundColor: '#ffb91a',
-            top: '75px',
-            left: '20px'
+            top: '75px', // Centralizada na barra cinza
+            left: '20px' // Centralizada na barra cinza
           }}
         />
         
-        {/* Tempo numérico - Artega Sans, bold+itálico, 25pt, cor #333330, kerning -143, direita da barra, leve sobreposição */}
+        {/* Tempo numérico - Artega Sans, bold+itálico, 25pt, cor #333330, kerning -30, direita da barra */}
         <div 
           className="absolute"
           style={{ 
@@ -99,7 +108,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontSize: '25pt',
             fontWeight: 'bold',
             fontStyle: 'italic',
-            letterSpacing: '-143px' // Kerning original mais agressivo
+            letterSpacing: '-30px'
           }}
         >
           {timeDisplay}
