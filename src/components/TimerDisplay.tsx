@@ -33,9 +33,6 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   
   // Largura da barra amarela baseada no tempo restante
   const yellowBarWidth = (barWidth * remainingPercentage) / 100;
-  
-  // Posição da barra amarela: sempre alinhada à direita da barra cinza
-  const yellowBarLeft = 20 + (barWidth - yellowBarWidth);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -43,11 +40,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título com underscore amarelo */}
+        {/* Título com underscore amarelo - 1d da base */}
         <div 
           className="absolute"
           style={{ 
-            top: '22px',
+            bottom: `${10.5 + 25}px`, // 1d (altura da letra d ≈ 25px no font-size 25pt) da barra
             left: '20px',
             color: '#333330',
             fontFamily: 'Sansation, sans-serif',
@@ -58,11 +55,11 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           <span style={{ color: '#ffb91a' }}>_</span>{title}
         </div>
         
-        {/* Tempo numérico com underscore amarelo após os números */}
+        {/* Tempo numérico com underscore amarelo após os números - 1d da base */}
         <div 
           className="absolute"
           style={{ 
-            top: '22px',
+            bottom: `${10.5 + 25}px`, // 1d (altura da letra d ≈ 25px no font-size 25pt) da barra
             right: '20px',
             color: '#333330',
             fontFamily: 'Artegra Sans, sans-serif',
@@ -81,8 +78,9 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             width: `${barWidth}px`,
             height: `${barHeight}px`,
             backgroundColor: '#333330',
-            top: '75px',
-            left: '20px'
+            top: '50%',
+            left: '20px',
+            transform: 'translateY(-50%)'
           }}
         />
         
@@ -93,17 +91,18 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             width: `${yellowBarWidth}px`,
             height: `${barHeight}px`,
             backgroundColor: '#ffb91a',
-            top: '75px',
-            left: `${yellowBarLeft}px`
+            top: '50%',
+            left: '20px',
+            transform: 'translateY(-50%)'
           }}
         />
         
-        {/* Ícones de controle - alinhados ao final dos números (sem o underscore) */}
+        {/* Ícones de controle - 1d abaixo da barra, alinhados ao final dos números */}
         <div 
           className="absolute flex items-center cursor-pointer"
           style={{
-            top: `${75 + barHeight + 25}px`,
-            right: '58px', // Ajustado para alinhar com o final dos números
+            top: `${50 + barHeight/2 + 25}px`, // 1d (25px) abaixo da barra
+            right: '58px', // Alinhado com o final dos números
             gap: '10px'
           }}
         >
