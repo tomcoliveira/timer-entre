@@ -23,62 +23,75 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
       <div 
-        className="relative bg-black border-2 border-white"
+        className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título - posicionado no topo esquerdo */}
+        {/* Título - Sansation, 25pt, cor #333330, kerning -43, esquerda, 20-25px do topo */}
         <div 
-          className="absolute top-4 left-6"
+          className="absolute"
           style={{ 
-            color: '#ffffff',
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '20px',
-            fontWeight: 'normal'
+            top: '22px',
+            left: '20px',
+            color: '#333330',
+            fontFamily: 'Sansation, sans-serif',
+            fontSize: '25pt',
+            fontWeight: 'normal',
+            letterSpacing: '-43px'
           }}
         >
           {title}
         </div>
         
-        {/* Controles do timer no canto superior direito */}
-        <div className="absolute top-4 right-6 flex items-center space-x-4">
-          <Play size={20} style={{ color: '#ffb91a' }} />
-          <Pause size={20} style={{ color: '#ffb91a' }} />
-          <Square size={20} style={{ color: '#ffb91a' }} />
+        {/* Ícones de controle - direita superior, acima da barra, amarelo #ffb91a, 15-20px, espaçamento 10px */}
+        <div 
+          className="absolute flex items-center"
+          style={{
+            top: '20px',
+            right: '20px',
+            gap: '10px'
+          }}
+        >
+          <Play size={18} style={{ color: '#ffb91a' }} />
+          <Pause size={18} style={{ color: '#ffb91a' }} />
+          <Square size={18} style={{ color: '#ffb91a' }} />
         </div>
         
-        {/* Barra cinza - fundo */}
+        {/* Barra de fundo (cinza) - largura total com margem ~20px, altura ~30px, centralizada, abaixo do título */}
         <div 
           className="absolute"
           style={{
-            width: '690px',
-            height: '35px',
+            width: '710px',
+            height: '30px',
             backgroundColor: '#333330',
-            top: '55px',
-            left: '30px'
+            top: '75px',
+            left: '20px'
           }}
         />
         
-        {/* Barra laranja - progresso */}
+        {/* Barra de progresso (amarela) - sobreposta na cinza, mesmo tamanho inicial */}
         <div 
           className="absolute"
           style={{
-            width: '675px',
-            height: '25px',
+            width: '710px',
+            height: '30px',
             backgroundColor: '#ffb91a',
-            top: '60px',
-            left: '37px'
+            top: '75px',
+            left: '20px'
           }}
         />
         
-        {/* Timer - números grandes centralizados na parte inferior */}
+        {/* Tempo numérico - Artega Sans, bold+itálico, 25pt, cor #333330, kerning -143, direita da barra, leve sobreposição */}
         <div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute"
           style={{ 
-            color: '#ffffff',
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '72px',
+            top: '115px',
+            right: '15px',
+            color: '#333330',
+            fontFamily: 'Artega Sans, sans-serif',
+            fontSize: '25pt',
             fontWeight: 'bold',
-            letterSpacing: '2px'
+            fontStyle: 'italic',
+            letterSpacing: '-143px'
           }}
         >
           {timeDisplay}
