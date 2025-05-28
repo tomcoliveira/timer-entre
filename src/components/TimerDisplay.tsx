@@ -44,7 +44,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontFamily: 'Sansation, sans-serif',
             fontSize: '25pt',
             fontWeight: 'normal',
-            letterSpacing: '-1.5px' // Ajustado o kerning para ser mais suave
+            letterSpacing: '-43px' // Kerning original mais agressivo
           }}
         >
           {title}
@@ -99,7 +99,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             fontSize: '25pt',
             fontWeight: 'bold',
             fontStyle: 'italic',
-            letterSpacing: '-2px' // Ajustado o kerning para ser mais legível
+            letterSpacing: '-143px' // Kerning original mais agressivo
           }}
         >
           {timeDisplay}
