@@ -26,14 +26,13 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black border-2 border-white"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título - sansation, corpo 25, cor #333330, espaçamento -43 */}
+        {/* Título - posicionado no topo esquerdo */}
         <div 
-          className="absolute top-6 left-6"
+          className="absolute top-4 left-6"
           style={{ 
-            color: '#333330',
-            fontFamily: 'sansation, sans-serif',
-            fontSize: '25px',
-            letterSpacing: '-43px',
+            color: '#ffffff',
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '20px',
             fontWeight: 'normal'
           }}
         >
@@ -41,46 +40,45 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         </div>
         
         {/* Controles do timer no canto superior direito */}
-        <div className="absolute top-6 right-6 flex items-center space-x-3">
-          <Play size={24} style={{ color: '#ffb91a' }} />
-          <Pause size={24} style={{ color: '#ffb91a' }} />
-          <Square size={24} style={{ color: '#ffb91a' }} />
+        <div className="absolute top-4 right-6 flex items-center space-x-4">
+          <Play size={20} style={{ color: '#ffb91a' }} />
+          <Pause size={20} style={{ color: '#ffb91a' }} />
+          <Square size={20} style={{ color: '#ffb91a' }} />
         </div>
         
-        {/* Barra cinza - 540x40 */}
+        {/* Barra cinza - fundo */}
         <div 
           className="absolute"
           style={{
-            width: '540px',
-            height: '40px',
+            width: '690px',
+            height: '35px',
             backgroundColor: '#333330',
-            top: '65px',
-            left: '6px'
+            top: '55px',
+            left: '30px'
           }}
         />
         
-        {/* Barra laranja - 525x30 */}
+        {/* Barra laranja - progresso */}
         <div 
           className="absolute"
           style={{
-            width: '525px',
-            height: '30px',
+            width: '675px',
+            height: '25px',
             backgroundColor: '#ffb91a',
-            top: '70px',
-            left: '12px'
+            top: '60px',
+            left: '37px'
           }}
         />
         
-        {/* Timer - artegasans, corpo 48, espaçamento -143, cor #333330 para números, #ffb91a bold+itálico */}
+        {/* Timer - números grandes centralizados na parte inferior */}
         <div 
-          className="absolute bottom-6 right-6"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           style={{ 
-            color: '#333330',
-            fontFamily: 'artegasans, sans-serif',
-            fontSize: '48px',
-            letterSpacing: '-143px',
+            color: '#ffffff',
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '72px',
             fontWeight: 'bold',
-            fontStyle: 'italic'
+            letterSpacing: '2px'
           }}
         >
           {timeDisplay}
