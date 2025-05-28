@@ -26,7 +26,17 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
 }) => {
   // Calcula a porcentagem do progresso restante
   const progressPercentage = totalSeconds > 0 ? (remainingSeconds / totalSeconds) * 100 : 0;
-  const progressWidth = (705 * progressPercentage) / 100; // Barra amarela um pouco menor
+  const progressWidth = (675 * progressPercentage) / 100; // Barra amarela (95% da cinza)
+
+  // Formata o tempo com separador amarelo
+  const formatTimeWithColoredSeparator = (timeString: string) => {
+    const [minutes, seconds] = timeString.split(':');
+    return (
+      <>
+        {minutes}<span style={{ color: '#ffb91a' }}>:</span>{seconds}
+      </>
+    );
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black font-inter">
@@ -34,7 +44,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         className="relative bg-black"
         style={{ width: '750px', height: '225px' }}
       >
-        {/* Título - Sansation, 25pt, cor #333330, kerning -10, esquerda, 20-25px do topo */}
+        {/* Título - Sansation, 25pt, cor #333330, sem kerning, esquerda, 20-25px do topo */}
         <div 
           className="absolute"
           style={{ 
@@ -43,19 +53,42 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             color: '#333330',
             fontFamily: 'Sansation, sans-serif',
             fontSize: '25pt',
-            fontWeight: 'normal',
-            letterSpacing: '-10px'
+            fontWeight: 'normal'
           }}
         >
           {title}
         </div>
         
-        {/* Ícones de controle - alinhados com o título, direita, amarelo #ffb91a, 18px, espaçamento 10px */}
+        {/* Barra de fundo (cinza) - 5% maior que a amarela nos dois sentidos */}
+        <div 
+          className="absolute"
+          style={{
+            width: '710px',
+            height: '15px', // 50% menor que antes (30px -> 15px)
+            backgroundColor: '#333330',
+            top: '75px',
+            left: '20px'
+          }}
+        />
+        
+        {/* Barra de progresso (amarela) - centralizada na cinza, 95% do tamanho da cinza */}
+        <div 
+          className="absolute transition-all duration-1000 ease-linear"
+          style={{
+            width: `${progressWidth}px`,
+            height: '13.5px', // 90% da altura da cinza para centralizar
+            backgroundColor: '#ffb91a',
+            top: '75.75px', // Centralizada verticalmente na barra cinza
+            left: '37.5px' // Centralizada horizontalmente na barra cinza
+          }}
+        />
+        
+        {/* Ícones de controle - alinhados com o final da barra cinza */}
         <div 
           className="absolute flex items-center cursor-pointer"
           style={{
-            top: '22px', // Mesmo alinhamento do título
-            right: '20px',
+            top: '115px',
+            right: '20px', // Alinhado com o final da barra cinza
             gap: '10px'
           }}
         >
@@ -73,45 +106,20 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
           />
         </div>
         
-        {/* Barra de fundo (cinza) - ligeiramente maior que a amarela */}
-        <div 
-          className="absolute"
-          style={{
-            width: '715px', // Ligeiramente maior
-            height: '32px', // Ligeiramente maior
-            backgroundColor: '#333330',
-            top: '74px', // Ligeiramente acima para centralizar
-            left: '17.5px' // Ligeiramente à esquerda para centralizar
-          }}
-        />
-        
-        {/* Barra de progresso (amarela) - diminui conforme o tempo restante, centralizada na cinza */}
-        <div 
-          className="absolute transition-all duration-1000 ease-linear"
-          style={{
-            width: `${progressWidth}px`,
-            height: '30px',
-            backgroundColor: '#ffb91a',
-            top: '75px', // Centralizada na barra cinza
-            left: '20px' // Centralizada na barra cinza
-          }}
-        />
-        
-        {/* Tempo numérico - Artega Sans, bold+itálico, 25pt, cor #333330, kerning -30, direita da barra */}
+        {/* Tempo numérico - Artega Sans, bold+itálico, 25pt, cor #333330, sem kerning, alinhado com o final da barra */}
         <div 
           className="absolute"
           style={{ 
-            top: '115px',
-            right: '15px',
+            top: '140px',
+            right: '20px', // Alinhado com o final da barra cinza
             color: '#333330',
             fontFamily: 'Artega Sans, sans-serif',
             fontSize: '25pt',
             fontWeight: 'bold',
-            fontStyle: 'italic',
-            letterSpacing: '-30px'
+            fontStyle: 'italic'
           }}
         >
-          {timeDisplay}
+          {formatTimeWithColoredSeparator(timeDisplay)}
         </div>
       </div>
       
