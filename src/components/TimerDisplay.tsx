@@ -33,7 +33,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
   
   // Barra cinza: 5% maior que a amarela
   const grayBarWidth = yellowBarWidth * 1.05; // 708.75px
-  const grayBarHeight = yellowBarHeight * 1.5; // 15px (50% maior para ser mais visível)
+  const grayBarHeight = yellowBarHeight * 1.05; // 10.5px
   
   const progressWidth = (yellowBarWidth * progressPercentage) / 100;
 
@@ -65,15 +65,16 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
             top: '22px', // Mesma altura do título
             right: '20px',
             color: '#333330',
-            fontFamily: 'Inter, sans-serif', // Fonte original dos números
-            fontSize: '25pt', // Mesmo tamanho do título
+            fontFamily: 'Artegra Sans, sans-serif',
+            fontSize: '25pt',
+            fontStyle: 'italic',
             fontWeight: 'normal'
           }}
         >
           {timeDisplay}
         </div>
         
-        {/* Barra de fundo (cinza) - maior que a amarela */}
+        {/* Barra de fundo (cinza) - 5% maior que a amarela */}
         <div 
           className="absolute"
           style={{
